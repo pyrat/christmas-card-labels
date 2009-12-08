@@ -31,6 +31,8 @@ ExtScaffold.Address = Ext.extend(Ext.Panel, {
   errorMessageBoxTitle: 'Error',
   printButtonLabel: "Print",
   printButtonTooltip: "Print these addresses to labels.",
+  printSelectedButtonLabel: "Print Selected",
+  printSelectedButtonTooltip: "Print Selected addresses to labels.",
   confirmationMessageBoxTitle: 'Confirmation',
 
   //
@@ -184,6 +186,16 @@ ExtScaffold.Address = Ext.extend(Ext.Panel, {
 	function printButtonHandler() {
 		location.href = "/labels";
 	}
+
+  
+  function printSelectedButtonHandler() {
+    var selected = scaffoldPanel.getGridPanel().getSelectionModel().getSelections();
+    var ids = [];
+    for (var i = 0; i < selected.length; i++) {
+      ids.push(selected[i]['data']['id']);
+    }
+    location.href = "/labels?ids=" + ids.join(',');
+	}
     
     function deleteButtonHandler() {
       var selected = scaffoldPanel.getGridPanel().getSelectionModel().getSelected();
@@ -222,7 +234,7 @@ ExtScaffold.Address = Ext.extend(Ext.Panel, {
         ds: ds,
         cm: cm,
         sm: new Ext.grid.RowSelectionModel({
-          singleSelect:true,
+          singleSelect:false,
           listeners: {
             // populate form fields when a row is selected
             'rowselect': function(sm, row, rec) {
@@ -255,7 +267,13 @@ ExtScaffold.Address = Ext.extend(Ext.Panel, {
 	          tooltip: scaffoldPanel.printButtonTooltip,
 	          handler: printButtonHandler,
 	          iconCls: 'details'
-	          }, '->', {
+	          },{
+  	          text:    scaffoldPanel.printSelectedButtonLabel,
+  	          tooltip: scaffoldPanel.printSelectedButtonTooltip,
+  	          handler: printSelectedButtonHandler,
+  	          iconCls: 'details'
+  	          },
+	           '->', {
             id: 'address-form-toggle',
             iconCls: 'details',
             text:    scaffoldPanel.formToggleButtonLabel,

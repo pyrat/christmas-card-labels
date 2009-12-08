@@ -1,5 +1,10 @@
 class LabelsController < ApplicationController
   def index
-    @addresses = Address.all
+    if params[:ids] && !params[:ids].blank?
+      ids = params[:ids].split(',')
+      @addresses = Address.find(ids)
+    else
+      @addresses = Address.all
+    end
   end
 end
