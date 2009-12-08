@@ -1,0 +1,18 @@
+<div id="container">
+<% i = 0 %>
+<% @addresses.each do |address| %>
+  <div class="address <%= last_row_class(i) %> <%= first_row_class(i) %>">
+    <%= address.name %><br />
+    <%= address.address1 %><br />
+    <%- unless address.address2.blank? -%>
+    <%= address.address2 %><br />
+    <%- end -%>
+    <%= address.city %><br />
+    <%= address.postcode %><br />
+    <%= address.country %>
+  </div>
+  <% i += 1 %>
+<%- end -%>
+<br style="clear:both" />
+</div>
+    

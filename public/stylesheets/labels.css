@@ -1,0 +1,27 @@
+body {
+  font-family: "MS Trebuchet", Helvetica;
+  margin: 0;
+  font-size: 12px;
+}
+
+#container {
+  width: 800px;
+}
+
+.address {
+  width: 220px;
+  height: 150px;
+  float: left;
+  max-width: 220px;
+  max-height: 150px;
+  overflow: hidden;
+  margin:0;
+  margin-right: 14px;
+  padding-left: 30px;
+}
+
+.last_row {
+  height: 105px;
+  max-height: 105px;
+}
+    
